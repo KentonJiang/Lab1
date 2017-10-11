@@ -38,6 +38,7 @@ public class MyGraphTest
         System.out.println(aGraph.calcShortestPath("civilizations", "new"));
         System.out.println(aGraph.randomWalk());
 	}
+	//在塞四上改的
 }
 class edgeNode
 {
