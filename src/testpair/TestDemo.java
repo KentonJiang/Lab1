@@ -23,6 +23,7 @@ public class TestDemo{
 		});
 	}
 }
+//在塞四上改的
 class SimpleFrame extends JFrame {
 	JTextField textField, textField1, textField2, textField3, textField4;
 	String fName;
