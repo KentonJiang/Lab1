@@ -339,6 +339,7 @@ private static String DOT = configFile.getProperty("dotFor" + osName);
 
      try
      {
+    	 //b1
          FileInputStream fis = new FileInputStream(input);
          DataInputStream dis = new DataInputStream(fis);
          BufferedReader br = new BufferedReader(new InputStreamReader(dis));

@@ -42,6 +42,7 @@ class SimpleFrame extends JFrame {
 			northpanel.add(new JLabel("文件名:"));
 			textField = new JTextField(20);
 			northpanel.add(textField);
+			//b1
 			JButton scanButton = new JButton("浏览");
 			JButton okButton = new JButton("读取");
 			northpanel.add(scanButton);

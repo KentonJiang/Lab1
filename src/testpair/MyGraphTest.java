@@ -39,6 +39,7 @@ public class MyGraphTest
         System.out.println(aGraph.randomWalk());
 	}
 }
+//b1
 class edgeNode
 {
 	private int weight; //权值，由在文本中相邻的次数确定
