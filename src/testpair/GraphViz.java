@@ -277,6 +277,7 @@ private static String DOT = configFile.getProperty("dotFor" + osName);
  {
      File temp;
      try {
+    	 //change one
          temp = File.createTempFile("dorrr",".dot", new File(GraphViz.TEMP_DIR));
          FileWriter fout = new FileWriter(temp);
          fout.write(str);
