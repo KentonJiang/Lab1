@@ -30,6 +30,7 @@ class SimpleFrame extends JFrame {
 	{
 		//获取分辨率
 		//change two
+		//b2
 			Toolkit kit= Toolkit.getDefaultToolkit();
 			Dimension screenSize=kit.getScreenSize();
 			int screenHeight=screenSize.height;
