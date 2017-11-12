@@ -192,19 +192,19 @@ class SimpleFrame extends JFrame {
                   String dot = "";
                   final String[] results = result.split("\\s+");
                   final int nlonger = results.length;
-                  Iterator<Map.Entry<String, ArrayList<EdgeNode>>> 
+                  Iterator<Map.Entry<String, ArrayList<edgeNode>>> 
                       i = graph.getHead().entrySet().iterator();
                   while (i.hasNext()) {
-                    final Map.Entry<String, ArrayList<EdgeNode>> ahead = 
-                        (Map.Entry<String, ArrayList<EdgeNode>>) i.next();
+                    final Map.Entry<String, ArrayList<edgeNode>> ahead = 
+                        (Map.Entry<String, ArrayList<edgeNode>>) i.next();
                     // System.out.print(ahead.getKey()+":");
 
-                    final ArrayList<EdgeNode> mlonger = (ArrayList<EdgeNode>) ahead.getValue();
+                    final ArrayList<edgeNode> mlonger = (ArrayList<edgeNode>) ahead.getValue();
                     if (mlonger != null) {
-                      final Iterator<EdgeNode> j = mlonger.iterator();
+                      final Iterator<edgeNode> j = mlonger.iterator();
                       while (j.hasNext()) {
                         // System.out.print(j.next().getWord() + " ");
-                        final EdgeNode tlonger = j.next();
+                        final edgeNode tlonger = j.next();
                         boolean findEdge = false;
                         for (int k = 0; k < nlonger - 1; k++) {
                           if (results[k].equals(ahead.getKey()) 

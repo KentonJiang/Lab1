@@ -29,8 +29,5 @@ public class GraphTest2 {
     if (!result.equals("his and ") && !result.equals("and his ")) { 
       fail("fail ---多个桥接词失败");
     }
-    
-    
   }
-
 }
