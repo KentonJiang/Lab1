@@ -86,12 +86,8 @@ class SimpleFrame extends JFrame {
       @Override
       public void actionPerformed(ActionEvent event) {
         southPanel.removeAll();
-        final Graph graph = new Graph();
-        try {
-          graph.createGraph(textField.getText());
-        } catch (IOException e1) {
-          e1.printStackTrace();
-        }
+        final GraphControl graph = new GraphControl();
+          graph.showGraph(textField.getText());
         final JButton showButton = new JButton("展示有向图");
         final JButton spButton = new JButton("最短路径查询");
         final JButton rdButton = new JButton("随机游走");
@@ -180,7 +176,6 @@ class SimpleFrame extends JFrame {
             sbutton.addActionListener(new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent event) {
-                // TODO Auto-generated method stub
                 final String aword = textField3.getText();
                 final String bword = textField4.getText();
                 String result;
@@ -192,19 +187,19 @@ class SimpleFrame extends JFrame {
                   String dot = "";
                   final String[] results = result.split("\\s+");
                   final int nlonger = results.length;
-                  Iterator<Map.Entry<String, ArrayList<edgeNode>>> 
-                      i = graph.getHead().entrySet().iterator();
+                  Iterator<Map.Entry<String, ArrayList<EdgeNode>>> 
+                      i = graph.graph.getHead().entrySet().iterator();
                   while (i.hasNext()) {
-                    final Map.Entry<String, ArrayList<edgeNode>> ahead = 
-                        (Map.Entry<String, ArrayList<edgeNode>>) i.next();
+                    final Map.Entry<String, ArrayList<EdgeNode>> ahead = 
+                        (Map.Entry<String, ArrayList<EdgeNode>>) i.next();
                     // System.out.print(ahead.getKey()+":");
 
-                    final ArrayList<edgeNode> mlonger = (ArrayList<edgeNode>) ahead.getValue();
+                    final ArrayList<EdgeNode> mlonger = (ArrayList<EdgeNode>) ahead.getValue();
                     if (mlonger != null) {
-                      final Iterator<edgeNode> j = mlonger.iterator();
+                      final Iterator<EdgeNode> j = mlonger.iterator();
                       while (j.hasNext()) {
                         // System.out.print(j.next().getWord() + " ");
-                        final edgeNode tlonger = j.next();
+                        final EdgeNode tlonger = j.next();
                         boolean findEdge = false;
                         for (int k = 0; k < nlonger - 1; k++) {
                           if (results[k].equals(ahead.getKey()) 
@@ -228,7 +223,7 @@ class SimpleFrame extends JFrame {
                   Graph.createDotGraph(dot, "graph_shortest_road");
                   final String nowpath = System.getProperty("user.dir");
                   spicon.setIcon(new ImageIcon(nowpath + "/graph_shortest_road.png"));
-                  textArea.append(graph.getshortsum());
+                  textArea.append(graph.graph.getshortsum());
                   spFrame.pack();
                 }
               }
@@ -283,7 +278,6 @@ class SimpleFrame extends JFrame {
 
           @Override
           public void actionPerformed(final ActionEvent eventlonger) {
-            graph.exit = false;
             validate();
             final Runnable traversal = () -> {
               String tpath = graph.randomWalk();
@@ -299,7 +293,7 @@ class SimpleFrame extends JFrame {
             final Thread thread = new Thread(traversal);
             thread.start();
             stopButton.addActionListener(event -> {
-              graph.exit = true;
+              graph.graph.exit = true;
             });
             try {
               thread.join();

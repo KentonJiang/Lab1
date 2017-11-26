@@ -40,11 +40,11 @@ public class MyGraphTest
         System.out.println(aGraph.randomWalk());
 	}
 }
-class edgeNode
+class EdgeNode
 {
 	private int weight; //权值，由在文本中相邻的次数确定
 	private String word; //单字
-	public edgeNode(String mWord)
+	public EdgeNode(String mWord)
 	{
 		word = mWord;
 		weight = 1;
@@ -67,15 +67,15 @@ class edgeNode
 
 class Graph
 {
-	private Map<String,ArrayList<edgeNode>> head;
+	private Map<String,ArrayList<EdgeNode>> head;
 	private int shortsum;
 	public String getshortsum() {
 		return ""+shortsum;
 	}
 	public Graph() {
-		head = new HashMap<String,ArrayList<edgeNode>>();
+		head = new HashMap<String,ArrayList<EdgeNode>>();
 	}
-	public Map<String, ArrayList<edgeNode>> getHead() {
+	public Map<String, ArrayList<EdgeNode>> getHead() {
 		return head;
 	}
 	public void createGraph(String filepath) throws IOException {
@@ -93,26 +93,26 @@ class Graph
         String[] myStringList = myString.split("\\s+");
         
 		int n = myStringList.length;
-		ArrayList<edgeNode> m;
+		ArrayList<EdgeNode> m;
 		for(int i = 0; i < n -1;i++)
 		{
 			m = head.get(myStringList[i]);
 			if (m == null) {
-				head.put(myStringList[i], new ArrayList<edgeNode>());
-				head.get(myStringList[i]).add(new edgeNode(myStringList[i+1]));
+				head.put(myStringList[i], new ArrayList<EdgeNode>());
+				head.get(myStringList[i]).add(new EdgeNode(myStringList[i+1]));
 			}
 			else {
-				ListIterator<edgeNode> eIter = m.listIterator();
+				ListIterator<EdgeNode> eIter = m.listIterator();
 				boolean added = false;
 				while (eIter.hasNext()) {
-					edgeNode mEdgeNode = eIter.next();
+					EdgeNode mEdgeNode = eIter.next();
 					if (myStringList[i+1].equals(mEdgeNode.getWord())){
 						added = true;
 						mEdgeNode.incWeight();
 					}
 				}
 				if (!added) {
-					eIter.add(new edgeNode(myStringList[i+1]));
+					eIter.add(new EdgeNode(myStringList[i+1]));
 				}
 			}
 		}
@@ -144,19 +144,19 @@ class Graph
 	}
 	public void check() {
 		String dot = "";
-		Iterator<Map.Entry<String, ArrayList<edgeNode>>> i = head.entrySet().iterator();
+		Iterator<Map.Entry<String, ArrayList<EdgeNode>>> i = head.entrySet().iterator();
 		while(i.hasNext())
 		{	 
-			Map.Entry<String,ArrayList<edgeNode>> ahead = (Map.Entry<String,ArrayList<edgeNode>>) i.next();
+			Map.Entry<String,ArrayList<EdgeNode>> ahead = (Map.Entry<String,ArrayList<EdgeNode>>) i.next();
 			//System.out.print(ahead.getKey()+":");
 			
-			ArrayList<edgeNode> m = (ArrayList<edgeNode>)ahead.getValue();
+			ArrayList<EdgeNode> m = (ArrayList<EdgeNode>)ahead.getValue();
 			if (m != null) {
-				Iterator<edgeNode> j = m.iterator();
+				Iterator<EdgeNode> j = m.iterator();
 				while(j.hasNext())
 				{
 					//System.out.print(j.next().getWord() + " ");
-					edgeNode t = j.next();
+					EdgeNode t = j.next();
 					dot = dot + ahead.getKey() + "->" + t.getWord()+"[label=\""+t.getWeight()+"\"];";
 				}
 			}	
@@ -193,7 +193,7 @@ class Graph
 		}
 		else 
 		{
-			ListIterator<edgeNode> bridge = head.get(word1).listIterator();
+			ListIterator<EdgeNode> bridge = head.get(word1).listIterator();
 			String bridgeWords = "";
 			boolean findBridge = false;
 			while(bridge.hasNext())
@@ -201,7 +201,7 @@ class Graph
 				String word3 = bridge.next().getWord();//就是临时变量
 				if(head.get(word3) != null)
 				{
-					ListIterator<edgeNode> abridge = head.get(word3).listIterator();
+					ListIterator<EdgeNode> abridge = head.get(word3).listIterator();
 					while(abridge.hasNext())
 					{
 						if(abridge.next().getWord().equals(word2))
@@ -265,7 +265,7 @@ class Graph
 				path.put(vertex, word1);
 			}
 			if (head.get(word1) != null)
-				for (edgeNode e : head.get(word1))
+				for (EdgeNode e : head.get(word1))
 					distance.put(e.getWord(), e.getWeight());
 			for (int i = 0; i < arr.length; i++) 
 				if (arr[i].equals(word1)) 
@@ -287,7 +287,7 @@ class Graph
 				arr[way] = null;
 				
 				if (head.get(propath) != null) {
-					for (edgeNode e : head.get(propath)) {	
+					for (EdgeNode e : head.get(propath)) {	
 						boolean find = false;
 						for (String s : arr) {
 							if (s!= null && s.equals(e.getWord())) 
